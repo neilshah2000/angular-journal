@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { JournalService } from './../journal.service';
+
 
 @Component({
     selector: 'app-create',
@@ -7,9 +9,25 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CreateComponent implements OnInit {
 
-    constructor() { }
+    journalName;
+
+    constructor(private journalService: JournalService) { }
 
     ngOnInit(): void {
     }
 
+    createJournal() {
+        const journal = {
+            name: this.journalName
+        }
+        this.journalService.create(journal).subscribe((journal) => {
+
+        }, () => {
+
+        });
+    }
+
+    createClicked() {
+        this.createJournal();
+    }
 }
